@@ -137,6 +137,7 @@ void ASGameMode::Gameover()
 	EndWave();
 
 	// TODO: Finish Gameover logic
+	ResetLevel();
 
 	UE_LOG(LogTemp, Log, TEXT("Game Over!"));
 

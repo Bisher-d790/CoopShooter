@@ -196,7 +196,7 @@ void ASTrackerBot::CheckNearbyBots() {
 
 	// Collision Query params
 	FCollisionObjectQueryParams QueryParams;
-	QueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
+	QueryParams.AddObjectTypesToQuery(ECC_WorldDynamic);
 
 	// Get overlapping actors in the radius of NeighborBotRadius 
 	TArray<FOverlapResult> Overlaps;
