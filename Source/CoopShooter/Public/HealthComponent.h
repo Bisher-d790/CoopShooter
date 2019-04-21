@@ -34,9 +34,6 @@ protected:
 	UFUNCTION()
 		void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintCallable, Category = "HealthComponent")
-		void Heal(float HealingAmount);
-
 	bool bIsDead;
 	
 public:
@@ -44,4 +41,7 @@ public:
 		FOnHealthChangedSignature OnHealthChanged;
 
 	FORCEINLINE float GetHealth() const { return Health; };
+
+	UFUNCTION(BlueprintCallable, Category = "HealthComponent")
+		void Heal(float HealingAmount);
 };

@@ -7,6 +7,7 @@
 #include "HealthComponent.h"
 #include "SGameState.h"
 #include "SPlayerState.h"
+#include "SCharacter.h"
 
 
 ASGameMode::ASGameMode()
@@ -137,7 +138,7 @@ void ASGameMode::Gameover()
 	EndWave();
 
 	// TODO: Finish Gameover logic
-	ResetLevel();
+
 
 	UE_LOG(LogTemp, Log, TEXT("Game Over!"));
 
@@ -161,6 +162,7 @@ void ASGameMode::RestartDeadPlayers()
 		if (PC && PC->GetPawn() == nullptr) {
 			FTimerHandle TimerHandle_RestartPlayer;
 			RestartPlayer(PC);
+			Cast<ASCharacter>(PC->GetPawn())->OnRestarted(PC);
 		}
 	}
 }

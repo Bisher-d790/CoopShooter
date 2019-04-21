@@ -10,6 +10,7 @@
 #include "Engine/World.h"
 #include "SWeapon.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -31,6 +32,8 @@ ASCharacter::ASCharacter()
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(CollisionChannel_ShotTrace, ECR_Ignore);
+
+	bIsDead = false;
 
 	WeaponSocketName = "WeaponSocket";
 }
@@ -69,6 +72,9 @@ FVector ASCharacter::GetPawnViewLocation() const
 void ASCharacter::OnHealthChanged(UHealthComponent * LocalHealthComponent, float Health, float HealthDelta, const UDamageType * DamageType, AController * InstigatedBy, AActor * DamageCauser)
 {
 	if (Health <= 0.0f && !bIsDead) {
+
+		OnKilled();
+
 		// Die
 		bIsDead = true;
 
@@ -77,6 +83,8 @@ void ASCharacter::OnHealthChanged(UHealthComponent * LocalHealthComponent, float
 
 		DetachFromControllerPendingDestroy();
 
+		StopFire();
+		CurrentWeapon->SetLifeSpan(0.0f);
 		SetLifeSpan(TimeToDestroyAfterDeath);
 	}
 

@@ -4,10 +4,10 @@
 #include "SGameState.h"
 #include "Net/UnrealNetwork.h"
 
+
 void ASGameState::OnRep_WaveState(EWaveState OldState) {
 	OnWaveStateChanged(OldState, WaveState);
 }
-
 
 void ASGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);

@@ -10,6 +10,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class ASWeapon;
 class UHealthComponent;
+class APlayerController;
 
 UCLASS()
 class COOPSHOOTER_API ASCharacter : public ACharacter
@@ -92,5 +93,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
-		bool bIsDead = false;
+		bool bIsDead;
+	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Player")
+		void OnRestarted(APlayerController* PlayerController);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Player")
+		void OnKilled();
 };
